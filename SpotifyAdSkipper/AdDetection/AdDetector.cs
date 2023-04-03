@@ -45,7 +45,6 @@ namespace SpotifyAdSkipper.AdDetection
                 UseDefaultAdDetectionFilters();
                 Logger.Write("Could not find file to load filters from. Assigned default filters.");
                 StoreAdDetectionFiltersInFile();
-                
             }
         }
 

@@ -22,6 +22,13 @@ namespace SpotifyAdSkipper
             UpdateContent();
         }
 
+        public void ScrollLogToBottom()
+        {
+            LogBox.SelectionStart = LogBox.TextLength;
+            LogBox.SelectionLength = 0;
+            LogBox.ScrollToCaret();
+        }
+
         private void FormUpdate_Tick(object sender, EventArgs e)
         {
             UpdateContent();

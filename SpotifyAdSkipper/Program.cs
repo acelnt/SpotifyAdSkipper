@@ -57,6 +57,7 @@ namespace SpotifyAdSkipper
         {
             AdSkipperInfoForm adSkipperInfoForm = new AdSkipperInfoForm();
             adSkipperInfoForm.Show();
+            adSkipperInfoForm.ScrollLogToBottom();
         }
     }
 }
