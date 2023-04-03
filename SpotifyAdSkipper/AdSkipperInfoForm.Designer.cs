@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdSkipperInfoForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CurrentAlbumRegisterbutton = new System.Windows.Forms.Button();
+            this.CurrentTitleRegisterButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -41,8 +43,7 @@
             this.FormUpdate = new System.Windows.Forms.Timer(this.components);
             this.StopButton = new System.Windows.Forms.Button();
             this.EditAdFeaturesButton = new System.Windows.Forms.Button();
-            this.CurrentTitleRegisterButton = new System.Windows.Forms.Button();
-            this.CurrentAlbumRegisterbutton = new System.Windows.Forms.Button();
+            this.CurrentArtistRegisterButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -50,6 +51,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.CurrentArtistRegisterButton);
             this.groupBox1.Controls.Add(this.CurrentAlbumRegisterbutton);
             this.groupBox1.Controls.Add(this.CurrentTitleRegisterButton);
             this.groupBox1.Controls.Add(this.tableLayoutPanel1);
@@ -59,6 +61,26 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Current Info";
+            // 
+            // CurrentAlbumRegisterbutton
+            // 
+            this.CurrentAlbumRegisterbutton.Location = new System.Drawing.Point(172, 109);
+            this.CurrentAlbumRegisterbutton.Name = "CurrentAlbumRegisterbutton";
+            this.CurrentAlbumRegisterbutton.Size = new System.Drawing.Size(159, 23);
+            this.CurrentAlbumRegisterbutton.TabIndex = 4;
+            this.CurrentAlbumRegisterbutton.Text = "Filter album title";
+            this.CurrentAlbumRegisterbutton.UseVisualStyleBackColor = true;
+            this.CurrentAlbumRegisterbutton.Click += new System.EventHandler(this.CurrentAlbumRegisterbutton_Click);
+            // 
+            // CurrentTitleRegisterButton
+            // 
+            this.CurrentTitleRegisterButton.Location = new System.Drawing.Point(6, 109);
+            this.CurrentTitleRegisterButton.Name = "CurrentTitleRegisterButton";
+            this.CurrentTitleRegisterButton.Size = new System.Drawing.Size(160, 23);
+            this.CurrentTitleRegisterButton.TabIndex = 3;
+            this.CurrentTitleRegisterButton.Text = "Filter song title";
+            this.CurrentTitleRegisterButton.UseVisualStyleBackColor = true;
+            this.CurrentTitleRegisterButton.Click += new System.EventHandler(this.CurrentTitleRegisterButton_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -85,9 +107,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 13);
+            this.label1.Size = new System.Drawing.Size(104, 26);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Playing Audios:";
+            this.label1.Text = "Playing Audios:\r\n(song - album - artist)";
             // 
             // label3
             // 
@@ -101,7 +123,7 @@
             // IsAdLabel
             // 
             this.IsAdLabel.AutoSize = true;
-            this.IsAdLabel.Location = new System.Drawing.Point(88, 63);
+            this.IsAdLabel.Location = new System.Drawing.Point(113, 63);
             this.IsAdLabel.Name = "IsAdLabel";
             this.IsAdLabel.Size = new System.Drawing.Size(21, 13);
             this.IsAdLabel.TabIndex = 3;
@@ -109,12 +131,12 @@
             // 
             // PlayingAudiosBox
             // 
-            this.PlayingAudiosBox.Location = new System.Drawing.Point(88, 3);
+            this.PlayingAudiosBox.Location = new System.Drawing.Point(113, 3);
             this.PlayingAudiosBox.Multiline = true;
             this.PlayingAudiosBox.Name = "PlayingAudiosBox";
             this.PlayingAudiosBox.ReadOnly = true;
             this.PlayingAudiosBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.PlayingAudiosBox.Size = new System.Drawing.Size(402, 57);
+            this.PlayingAudiosBox.Size = new System.Drawing.Size(377, 57);
             this.PlayingAudiosBox.TabIndex = 6;
             // 
             // groupBox2
@@ -162,25 +184,15 @@
             this.EditAdFeaturesButton.UseVisualStyleBackColor = true;
             this.EditAdFeaturesButton.Click += new System.EventHandler(this.EditAdFeaturesButton_Click);
             // 
-            // CurrentTitleRegisterButton
+            // CurrentArtistRegisterButton
             // 
-            this.CurrentTitleRegisterButton.Location = new System.Drawing.Point(6, 109);
-            this.CurrentTitleRegisterButton.Name = "CurrentTitleRegisterButton";
-            this.CurrentTitleRegisterButton.Size = new System.Drawing.Size(242, 23);
-            this.CurrentTitleRegisterButton.TabIndex = 3;
-            this.CurrentTitleRegisterButton.Text = "Register current song title as ad filter";
-            this.CurrentTitleRegisterButton.UseVisualStyleBackColor = true;
-            this.CurrentTitleRegisterButton.Click += new System.EventHandler(this.CurrentTitleRegisterButton_Click);
-            // 
-            // CurrentAlbumRegisterbutton
-            // 
-            this.CurrentAlbumRegisterbutton.Location = new System.Drawing.Point(254, 109);
-            this.CurrentAlbumRegisterbutton.Name = "CurrentAlbumRegisterbutton";
-            this.CurrentAlbumRegisterbutton.Size = new System.Drawing.Size(242, 23);
-            this.CurrentAlbumRegisterbutton.TabIndex = 4;
-            this.CurrentAlbumRegisterbutton.Text = "Register current album name as ad filter";
-            this.CurrentAlbumRegisterbutton.UseVisualStyleBackColor = true;
-            this.CurrentAlbumRegisterbutton.Click += new System.EventHandler(this.CurrentAlbumRegisterbutton_Click);
+            this.CurrentArtistRegisterButton.Location = new System.Drawing.Point(337, 109);
+            this.CurrentArtistRegisterButton.Name = "CurrentArtistRegisterButton";
+            this.CurrentArtistRegisterButton.Size = new System.Drawing.Size(159, 23);
+            this.CurrentArtistRegisterButton.TabIndex = 5;
+            this.CurrentArtistRegisterButton.Text = "Filter artist";
+            this.CurrentArtistRegisterButton.UseVisualStyleBackColor = true;
+            this.CurrentArtistRegisterButton.Click += new System.EventHandler(this.CurrentArtistRegisterButton_Click);
             // 
             // AdSkipperInfoForm
             // 
@@ -219,5 +231,6 @@
         private System.Windows.Forms.Button EditAdFeaturesButton;
         private System.Windows.Forms.Button CurrentAlbumRegisterbutton;
         private System.Windows.Forms.Button CurrentTitleRegisterButton;
+        private System.Windows.Forms.Button CurrentArtistRegisterButton;
     }
 }

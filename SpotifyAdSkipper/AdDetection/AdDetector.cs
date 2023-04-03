@@ -147,7 +147,7 @@ namespace SpotifyAdSkipper.AdDetection
                     property = media.AlbumTitle;
                     break;
                 case AudioProperty.Artist:
-                    property = media.AlbumTitle;
+                    property = media.Artist;
                     break;
                 default:
                     property = null;

@@ -50,7 +50,8 @@ namespace SpotifyAdSkipper
             {
                 string title = audio.Title;
                 string album = audio.AlbumTitle;
-                playingAudiosText += $"{title} - {album}\r\n";
+                string artist = audio.Artist;
+                playingAudiosText += $"{title} - {album} - {artist}\r\n";
             }
             PlayingAudiosBox.Text = playingAudiosText;
 
@@ -100,6 +101,18 @@ namespace SpotifyAdSkipper
             {
                 AddAdFilterForm addAdFiltersForm = new AddAdFilterForm(
                     AdDetection.AudioProperty.Album,
+                    playingTracks[0].AlbumTitle.ToLower());
+                addAdFiltersForm.Show();
+            }
+        }
+
+        private async void CurrentArtistRegisterButton_Click(object sender, EventArgs e)
+        {
+            var playingTracks = await SpotifyController.GetPlayingAudios();
+            if (playingTracks.Count > 0)
+            {
+                AddAdFilterForm addAdFiltersForm = new AddAdFilterForm(
+                    AdDetection.AudioProperty.Artist,
                     playingTracks[0].AlbumTitle.ToLower());
                 addAdFiltersForm.Show();
             }

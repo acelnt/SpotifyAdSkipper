@@ -34,16 +34,20 @@
             this.detectionFeatureEditControl1 = new SpotifyAdSkipper.FilterListEditControl();
             this.Album = new System.Windows.Forms.TabPage();
             this.detectionFeatureEditControl2 = new SpotifyAdSkipper.FilterListEditControl();
+            this.Artist = new System.Windows.Forms.TabPage();
+            this.filterListEditControl1 = new SpotifyAdSkipper.FilterListEditControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.PropertyTabs.SuspendLayout();
             this.Title.SuspendLayout();
             this.Album.SuspendLayout();
+            this.Artist.SuspendLayout();
             this.SuspendLayout();
             // 
             // PropertyTabs
             // 
             this.PropertyTabs.Controls.Add(this.Title);
             this.PropertyTabs.Controls.Add(this.Album);
+            this.PropertyTabs.Controls.Add(this.Artist);
             this.PropertyTabs.Location = new System.Drawing.Point(12, 12);
             this.PropertyTabs.Name = "PropertyTabs";
             this.PropertyTabs.SelectedIndex = 0;
@@ -90,18 +94,38 @@
             this.detectionFeatureEditControl2.Size = new System.Drawing.Size(341, 400);
             this.detectionFeatureEditControl2.TabIndex = 0;
             // 
-            // EditAdFeaturesForm
+            // Artist
+            // 
+            this.Artist.Controls.Add(this.filterListEditControl1);
+            this.Artist.Location = new System.Drawing.Point(4, 22);
+            this.Artist.Name = "Artist";
+            this.Artist.Size = new System.Drawing.Size(341, 400);
+            this.Artist.TabIndex = 2;
+            this.Artist.Text = "Artist";
+            this.Artist.UseVisualStyleBackColor = true;
+            // 
+            // filterListEditControl1
+            // 
+            this.filterListEditControl1.AudioProperty = SpotifyAdSkipper.AdDetection.AudioProperty.Artist;
+            this.filterListEditControl1.Location = new System.Drawing.Point(0, 0);
+            this.filterListEditControl1.MinimumSize = new System.Drawing.Size(72, 78);
+            this.filterListEditControl1.Name = "filterListEditControl1";
+            this.filterListEditControl1.Size = new System.Drawing.Size(341, 400);
+            this.filterListEditControl1.TabIndex = 0;
+            // 
+            // EditAdFiltersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(373, 450);
             this.Controls.Add(this.PropertyTabs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "EditAdFeaturesForm";
+            this.Name = "EditAdFiltersForm";
             this.Text = "Edit Ad Filters";
             this.PropertyTabs.ResumeLayout(false);
             this.Title.ResumeLayout(false);
             this.Album.ResumeLayout(false);
+            this.Artist.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -114,5 +138,7 @@
         private System.Windows.Forms.Timer timer1;
         private FilterListEditControl detectionFeatureEditControl1;
         private FilterListEditControl detectionFeatureEditControl2;
+        private System.Windows.Forms.TabPage Artist;
+        private FilterListEditControl filterListEditControl1;
     }
 }

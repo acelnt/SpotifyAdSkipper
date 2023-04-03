@@ -46,13 +46,13 @@ namespace SpotifyAdSkipper
 
             if (isAdPlaying)
             {
-                Logger.Write($"Ad detected: {adAudio.Title} - {adAudio.AlbumTitle}");
+                Logger.Write($"Ad detected: {adAudio.Title} - {adAudio.AlbumTitle} - {adAudio.Artist}");
 
                 CloseAndRestart();
             } else
             {
                 List<string> audioStrings = new List<string>();
-                foreach (var audio in playingAudios) { audioStrings.Add($"{audio.Title} - {audio.AlbumTitle}"); }
+                foreach (var audio in playingAudios) { audioStrings.Add($"{audio.Title} - {audio.AlbumTitle} - {audio.Artist}"); }
                 string currentSong = $"No ad detected: {String.Join(",", audioStrings)}";
                 if (currentSong != _previousSong)
                 {
@@ -152,8 +152,14 @@ namespace SpotifyAdSkipper
                     session.SourceAppUserModelId.Contains(PROCESS_NAME))
                 {
                     // Get the currently playing media information
-                    GlobalSystemMediaTransportControlsSessionMediaProperties mediaProperties =
-                        await session.TryGetMediaPropertiesAsync();
+                    GlobalSystemMediaTransportControlsSessionMediaProperties mediaProperties;
+                    try
+                    {
+                        mediaProperties = await session.TryGetMediaPropertiesAsync();
+                    } catch
+                    {
+                        mediaProperties = null;
+                    }
 
                     if (!(mediaProperties == null))
                     {

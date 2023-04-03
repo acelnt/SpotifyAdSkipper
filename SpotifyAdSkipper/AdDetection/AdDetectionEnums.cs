@@ -15,6 +15,7 @@ namespace SpotifyAdSkipper.AdDetection
     public enum AudioProperty
     {
         Title,
-        Album
+        Album,
+        Artist
     }
 }
