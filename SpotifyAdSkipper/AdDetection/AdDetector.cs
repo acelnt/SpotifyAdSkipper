@@ -92,7 +92,7 @@ namespace SpotifyAdSkipper.AdDetection
         /// <returns></returns>
         public static List<string> GetMatchValues(AudioProperty audioProperty, MatchStrength matchStrength)
         {
-            return _detectionFilters.GetMatchValues(audioProperty, matchStrength);
+            return _detectionFilters.GetMatchValuesForPropertyAndStrength(audioProperty, matchStrength);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace SpotifyAdSkipper.AdDetection
             {
                 foreach (MatchStrength matchStrength in Enum.GetValues(typeof(MatchStrength)))
                 { 
-                    foreach (string matchValue in _detectionFilters.GetMatchValues(audioProperty, matchStrength))
+                    foreach (string matchValue in _detectionFilters.GetMatchValuesForPropertyAndStrength(audioProperty, matchStrength))
                     {
                         string property = GetAudioProperty(media, audioProperty);
                         if (ComparePropertyToMatch(property, matchValue, matchStrength))
@@ -145,6 +145,9 @@ namespace SpotifyAdSkipper.AdDetection
                 case AudioProperty.Album:
                     property = media.AlbumTitle;
                     break;
+                case AudioProperty.Artist:
+                    property = media.AlbumTitle;
+                    break;
                 default:
                     property = null;
                     break;
@@ -163,23 +166,29 @@ namespace SpotifyAdSkipper.AdDetection
         /// <returns></returns>
         static bool ComparePropertyToMatch(string property, string matchValue, MatchStrength matchStrength)
         {
-            string lowercaseMatchValue = matchValue.ToLower();
-            string lowercaseproperty = property.ToLower();
-            bool isMatch;
-            // Different comparisons are used based on the value of matchStrength
-            switch (matchStrength)
+            try {
+                string lowercaseMatchValue = matchValue.ToLower();
+                string lowercaseproperty = property.ToLower();
+                bool isMatch;
+                // Different comparisons are used based on the value of matchStrength
+                switch (matchStrength)
+                {
+                    case MatchStrength.Exact:
+                        isMatch = lowercaseproperty == lowercaseMatchValue;
+                        break;
+                    case MatchStrength.Contains:
+                        isMatch = lowercaseproperty.Contains(lowercaseMatchValue);
+                        break;
+                    default:
+                        isMatch = false;
+                        break;
+                }
+                return isMatch;
+            } catch (NullReferenceException)
             {
-                case MatchStrength.Exact:
-                    isMatch = lowercaseproperty == lowercaseMatchValue;
-                    break;
-                case MatchStrength.Contains:
-                    isMatch = lowercaseproperty.Contains(lowercaseMatchValue);
-                    break;
-                default:
-                    isMatch = false;
-                    break;
+                return false;
             }
-            return isMatch;
+            
         }
     }
 }
