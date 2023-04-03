@@ -64,7 +64,7 @@ namespace SpotifyAdSkipper.AdDetection
             {
                 AddMatchStrengthKeyForAudioPropertyKey(audioProperty, matchStrength);
             }
-            _detectionFilters[audioProperty][matchStrength].Add(matchValue);
+            _detectionFilters[audioProperty][matchStrength].Add(matchValue.ToLower());
         }
 
         /// <summary>
