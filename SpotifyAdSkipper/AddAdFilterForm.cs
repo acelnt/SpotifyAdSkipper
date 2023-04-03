@@ -22,16 +22,19 @@ namespace SpotifyAdSkipper
             _audioProperty = audioProperty;
             
             // Let label describe what is being added
-            DescriptionLabel.Text = $"Add new {audioProperty.ToString()} ad filter.\nCase is ignored.";
+            DescriptionLabel.Text = $"Add new {audioProperty} ad filter.\nCase is ignored.";
 
             // Set the match value text box to the initial value
             MatchValueBox.Text = initialMatchValue;
 
             // Populate match strength drop down with correct values
-            foreach (var matchStrength in Enum.GetValues(typeof(AdDetection.MatchStrength)))
+            foreach (var matchStrength in Enum.GetValues(typeof(MatchStrength)))
             {
                 MatchStrengthDropDown.Items.Add(matchStrength.ToString());
             }
+
+            // Make initial strength be Exact
+            MatchStrengthDropDown.Text = MatchStrength.Exact.ToString();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -42,11 +45,11 @@ namespace SpotifyAdSkipper
         private void AddButton_Click(object sender, EventArgs e)
         {
             string matchValue = MatchValueBox.Text;
-            AdDetection.MatchStrength matchStrength;
+            MatchStrength matchStrength;
             Enum.TryParse(MatchStrengthDropDown.Text, out matchStrength);
 
-            AdDetection.AdDetector.AddAdDetectionFilter(_audioProperty, matchStrength, matchValue);
-            AdDetection.AdDetector.StoreAdDetectionFiltersInFile();
+            AdDetector.AddAdDetectionFilter(_audioProperty, matchStrength, matchValue);
+            AdDetector.StoreAdDetectionFiltersInFile();
 
             Close();
         }
