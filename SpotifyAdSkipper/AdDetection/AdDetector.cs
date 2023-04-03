@@ -68,8 +68,9 @@ namespace SpotifyAdSkipper.AdDetection
         /// <param name="match"></param>
         public static void AddAdDetectionFilter(AudioProperty audioProperty, MatchStrength matchStrength, string matchValue)
         {
-            _detectionFilters.Add(audioProperty, matchStrength, matchValue);
-            Logger.Write($"Added new ad detection filter matchValue:{matchValue}, audioProperty:{audioProperty.ToString()}, matchStrength:{matchStrength.ToString()}");
+            string lowercaseMatchValue = matchValue.ToLower();
+            _detectionFilters.Add(audioProperty, matchStrength, lowercaseMatchValue);
+            Logger.Write($"Added new ad detection filter matchValue:{lowercaseMatchValue}, audioProperty:{audioProperty.ToString()}, matchStrength:{matchStrength.ToString()}");
         }
 
         /// <summary>
