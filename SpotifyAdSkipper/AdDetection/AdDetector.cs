@@ -19,7 +19,7 @@ namespace SpotifyAdSkipper.AdDetection
     /// </summary>
     static class AdDetector
     {
-        const string FILEPATH = "adFeatures.txt";
+        const string FILEPATH = "adFilters.json";
 
         static AdDetectionFilterCollection _detectionFilters = new AdDetectionFilterCollection();
 
