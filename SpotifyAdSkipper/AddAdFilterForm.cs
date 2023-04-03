@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace SpotifyAdSkipper
 {
-    public partial class AddDetectionFeatureForm : Form
+    public partial class AddAdFilterForm : Form
     {
         AudioProperty _audioProperty;
 
-        public AddDetectionFeatureForm(AdDetection.AudioProperty audioProperty, string initialMatchValue = "")
+        public AddAdFilterForm(AdDetection.AudioProperty audioProperty, string initialMatchValue = "")
         {
             InitializeComponent();
             
@@ -28,9 +28,9 @@ namespace SpotifyAdSkipper
             MatchValueBox.Text = initialMatchValue;
 
             // Populate match strength drop down with correct values
-            foreach (var detectionStrength in Enum.GetValues(typeof(AdDetection.DetectionStrength)))
+            foreach (var matchStrength in Enum.GetValues(typeof(AdDetection.MatchStrength)))
             {
-                MatchStrengthDropDown.Items.Add(detectionStrength.ToString());
+                MatchStrengthDropDown.Items.Add(matchStrength.ToString());
             }
         }
 
@@ -42,11 +42,11 @@ namespace SpotifyAdSkipper
         private void AddButton_Click(object sender, EventArgs e)
         {
             string matchValue = MatchValueBox.Text;
-            AdDetection.DetectionStrength detectionStrength;
-            Enum.TryParse(MatchStrengthDropDown.Text, out detectionStrength);
+            AdDetection.MatchStrength matchStrength;
+            Enum.TryParse(MatchStrengthDropDown.Text, out matchStrength);
 
-            AdDetection.AdDetector.AddAdDetectionFeature(_audioProperty, detectionStrength, matchValue);
-            AdDetection.AdDetector.StoreAdDetectionFeaturesInFile();
+            AdDetection.AdDetector.AddAdDetectionFilter(_audioProperty, matchStrength, matchValue);
+            AdDetection.AdDetector.StoreAdDetectionFiltersInFile();
 
             Close();
         }

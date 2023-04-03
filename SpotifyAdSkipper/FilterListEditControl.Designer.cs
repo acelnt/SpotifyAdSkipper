@@ -1,6 +1,6 @@
 ﻿namespace SpotifyAdSkipper
 {
-    partial class DetectionFeatureEditControl
+    partial class FilterListEditControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             this.MatchValuesList = new System.Windows.Forms.ListView();
             this.strengthColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.matchValueColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -46,7 +46,7 @@
             this.MatchValuesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.MatchValuesList.HideSelection = false;
             this.MatchValuesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem1});
             this.MatchValuesList.Location = new System.Drawing.Point(3, 3);
             this.MatchValuesList.Name = "MatchValuesList";
             this.MatchValuesList.Size = new System.Drawing.Size(534, 488);
@@ -84,7 +84,7 @@
             this.RemoveButton.UseVisualStyleBackColor = true;
             this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
             // 
-            // DetectionFeatureEditControl
+            // FilterListEditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -92,9 +92,9 @@
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.MatchValuesList);
             this.MinimumSize = new System.Drawing.Size(72, 78);
-            this.Name = "DetectionFeatureEditControl";
+            this.Name = "FilterListEditControl";
             this.Size = new System.Drawing.Size(540, 525);
-            this.Resize += new System.EventHandler(this.DetectionFeatureEditControl_Resize);
+            this.Resize += new System.EventHandler(this.FilterListEditControl_Resize);
             this.ResumeLayout(false);
 
         }

@@ -1,6 +1,6 @@
 ﻿namespace SpotifyAdSkipper
 {
-    partial class AddDetectionFeatureForm
+    partial class AddAdFilterForm
     {
         /// <summary>
         /// Required designer variable.

@@ -17,7 +17,7 @@ namespace SpotifyAdSkipper
         static void Main()
         {
             Logger.Clear();
-            AdDetection.AdDetector.LoadAdDetectionFeaturesFromFile();
+            AdDetection.AdDetector.LoadAdDetectionFiltersFromFile();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

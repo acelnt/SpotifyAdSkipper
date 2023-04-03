@@ -15,88 +15,99 @@ namespace SpotifyAdSkipper.AdDetection
 {
     /// <summary>
     /// Class which allows you to check if a given audio is an ad based on its properties. You can
-    /// adjust the properties it checks for and how they are checked by changing the detection features.
+    /// adjust the properties it checks for and how they are checked by changing the detection filters.
     /// </summary>
     static class AdDetector
     {
         const string FILEPATH = "adFeatures.txt";
 
-        static AdDetectionFeatureCollection _detectionFeatures = new AdDetectionFeatureCollection();
+        static AdDetectionFilterCollection _detectionFilters = new AdDetectionFilterCollection();
 
-        public static void UseDefaultAdDetectionFeatures()
+        public static void UseDefaultAdDetectionFilters()
         {
-            _detectionFeatures.Add(AudioProperty.Title, DetectionStrength.Contains, "spotify");
-            _detectionFeatures.Add(AudioProperty.Title, DetectionStrength.Contains, "advertisement");
-            _detectionFeatures.Add(AudioProperty.Album, DetectionStrength.Contains, "advertisement");
+            _detectionFilters.Add(AudioProperty.Title, MatchStrength.Contains, "spotify");
+            _detectionFilters.Add(AudioProperty.Title, MatchStrength.Contains, "advertisement");
+            _detectionFilters.Add(AudioProperty.Album, MatchStrength.Contains, "advertisement");
         }
 
         /// <summary>
-        /// Loads ad detection features from the file it is stored in, using them for ad detection
+        /// Loads ad detection filters from the file it is stored in, using them for ad detection
         /// </summary>
-        public static void LoadAdDetectionFeaturesFromFile()
+        public static void LoadAdDetectionFiltersFromFile()
         {
             try
             {
                 string dataInFile = File.ReadAllText(FILEPATH);
-                _detectionFeatures.Deserialize(dataInFile);
+                _detectionFilters.Deserialize(dataInFile);
                 Logger.Write($"Loaded ad detection filters from {FILEPATH}");
             } catch (FileNotFoundException)
             {
-                UseDefaultAdDetectionFeatures();
+                UseDefaultAdDetectionFilters();
                 Logger.Write("Could not find file to load filters from. Assigned default filters.");
-                StoreAdDetectionFeaturesInFile();
+                StoreAdDetectionFiltersInFile();
                 
             }
         }
 
         /// <summary>
-        /// serializes and stores the ad detection features in a file
+        /// serializes and stores the ad detection filters in a file
         /// </summary>
-        public static void StoreAdDetectionFeaturesInFile()
+        public static void StoreAdDetectionFiltersInFile()
         {
-            File.WriteAllText(FILEPATH, _detectionFeatures.Serialize());
+            File.WriteAllText(FILEPATH, _detectionFilters.Serialize());
             Logger.Write($"Stored ad detection filters in file {FILEPATH}");
         }
 
         /// <summary>
-        /// Adds a new ad detection feature to the collection. audioProperty is the property to be examined
+        /// Adds a new ad detection filter to the collection. audioProperty is the property to be examined
         /// (e.g title or album name), matchValue is the value which you are comparing the property to to 
-        /// see if it indicates an ad and detectionStrength is how closely propertyMatch needs to match in
+        /// see if it indicates an ad and matchStrength is how closely the property and match needs to match in
         /// order to indicate an ad (exact or contains)
         /// </summary>
         /// <param name="audioProperty"></param>
-        /// <param name="detectionStrength"></param>
+        /// <param name="matchStrength"></param>
         /// <param name="match"></param>
-        public static void AddAdDetectionFeature(AudioProperty audioProperty, DetectionStrength detectionStrength, string matchValue)
+        public static void AddAdDetectionFilter(AudioProperty audioProperty, MatchStrength matchStrength, string matchValue)
         {
-            _detectionFeatures.Add(audioProperty, detectionStrength, matchValue);
-            Logger.Write($"Added new ad detection filter matchValue:{matchValue}, audioProperty:{audioProperty.ToString()}, matchStrength:{detectionStrength.ToString()}");
+            _detectionFilters.Add(audioProperty, matchStrength, matchValue);
+            Logger.Write($"Added new ad detection filter matchValue:{matchValue}, audioProperty:{audioProperty.ToString()}, matchStrength:{matchStrength.ToString()}");
         }
 
         /// <summary>
-        /// Removes an ad detection feature from the collection
+        /// Removes an ad detection filter from the collection
         /// </summary>
         /// <param name="audioProperty"></param>
-        /// <param name="detectionStrength"></param>
+        /// <param name="matchStrength"></param>
         /// <param name="matchValue"></param>
-        public static void RemoveAdDetectionFeature(AudioProperty audioProperty, DetectionStrength detectionStrength, string matchValue)
+        public static void RemoveAdDetectionFilter(AudioProperty audioProperty, MatchStrength matchStrength, string matchValue)
         {
-            _detectionFeatures.Remove(audioProperty, detectionStrength, matchValue);
-            Logger.Write($"Removed ad detection filter matchValue:{matchValue}, audioProperty:{audioProperty.ToString()}, matchStrength:{detectionStrength.ToString()}");
-        }
-
-        public static List<string> GetMatchValues(AudioProperty audioProperty, DetectionStrength detectionStrength)
-        {
-            return _detectionFeatures.GetMatchValues(audioProperty, detectionStrength);
-        }
-
-        public static Dictionary<DetectionStrength, List<string>> GetMatchValuesForProperty(AudioProperty audioProperty)
-        {
-            return _detectionFeatures.GetMatchValuesForProperty(audioProperty);
+            _detectionFilters.Remove(audioProperty, matchStrength, matchValue);
+            Logger.Write($"Removed ad detection filter matchValue:{matchValue}, audioProperty:{audioProperty.ToString()}, matchStrength:{matchStrength.ToString()}");
         }
 
         /// <summary>
-        /// Given a media, returns true if it is an ad based on the Ad detection features the class holds, and false if not
+        /// Returns a list of match values for filters for audioProperty and matchStrength
+        /// </summary>
+        /// <param name="audioProperty"></param>
+        /// <param name="matchStrength"></param>
+        /// <returns></returns>
+        public static List<string> GetMatchValues(AudioProperty audioProperty, MatchStrength matchStrength)
+        {
+            return _detectionFilters.GetMatchValues(audioProperty, matchStrength);
+        }
+
+        /// <summary>
+        /// Returns the match strength and match values for the filters which are for the property audioProperty
+        /// </summary>
+        /// <param name="audioProperty"></param>
+        /// <returns></returns>
+        public static Dictionary<MatchStrength, List<string>> GetMatchValuesForProperty(AudioProperty audioProperty)
+        {
+            return _detectionFilters.GetMatchValuesForProperty(audioProperty);
+        }
+
+        /// <summary>
+        /// Given a media, returns true if it is an ad based on the Ad detection filters the class holds, and false if not
         /// </summary>
         /// <param name="media"></param>
         /// <returns></returns>
@@ -104,12 +115,12 @@ namespace SpotifyAdSkipper.AdDetection
         {
             foreach (AudioProperty audioProperty in Enum.GetValues(typeof(AudioProperty)))
             {
-                foreach (DetectionStrength detectionStrength in Enum.GetValues(typeof(DetectionStrength)))
+                foreach (MatchStrength matchStrength in Enum.GetValues(typeof(MatchStrength)))
                 { 
-                    foreach (string matchValue in _detectionFeatures.GetMatchValues(audioProperty, detectionStrength))
+                    foreach (string matchValue in _detectionFilters.GetMatchValues(audioProperty, matchStrength))
                     {
                         string property = GetAudioProperty(media, audioProperty);
-                        if (ComparePropertyToMatch(property, matchValue, detectionStrength))
+                        if (ComparePropertyToMatch(property, matchValue, matchStrength))
                         {
                             return true;
                         }
@@ -143,26 +154,26 @@ namespace SpotifyAdSkipper.AdDetection
         }
 
         /// <summary>
-        /// Compares the property to the matchValue. Using detectionStrength as the measure of how close they should
+        /// Compares the property to the matchValue. Using matchStrength as the measure of how close they should
         /// match, return true if there is a match and false if there is not. Will convert matchValue and property
         /// to lowercase
         /// </summary>
         /// <param name="property"></param>
         /// <param name="matchValue"></param>
-        /// <param name="detectionStrength"></param>
+        /// <param name="matchStrength"></param>
         /// <returns></returns>
-        static bool ComparePropertyToMatch(string property, string matchValue, DetectionStrength detectionStrength)
+        static bool ComparePropertyToMatch(string property, string matchValue, MatchStrength matchStrength)
         {
             string lowercaseMatchValue = matchValue.ToLower();
             string lowercaseproperty = property.ToLower();
             bool isMatch;
-            // Different comparisons are used based on the value of detectionStrength
-            switch (detectionStrength)
+            // Different comparisons are used based on the value of matchStrength
+            switch (matchStrength)
             {
-                case DetectionStrength.Exact:
+                case MatchStrength.Exact:
                     isMatch = lowercaseproperty == lowercaseMatchValue;
                     break;
-                case DetectionStrength.Contains:
+                case MatchStrength.Contains:
                     isMatch = lowercaseproperty.Contains(lowercaseMatchValue);
                     break;
                 default:

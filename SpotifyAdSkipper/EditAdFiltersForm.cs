@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SpotifyAdSkipper
 {
-    public partial class EditAdFeaturesForm : Form
+    public partial class EditAdFiltersForm : Form
     {
-        public EditAdFeaturesForm()
+        public EditAdFiltersForm()
         {
             InitializeComponent();
         }

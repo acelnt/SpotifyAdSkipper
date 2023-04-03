@@ -29,7 +29,7 @@ namespace SpotifyAdSkipper
 
         private async void UpdateContent()
         {
-            // Update log box with new log data and scroll to the bottom if it isn't focused
+            // Update log box with new log data
             List<string> newLines = _loggerReader.NextLines();
             LogBox.AppendText(string.Join("\r\n", newLines) + ((newLines.Count > 0) ? "\r\n" : ""));
 
@@ -70,8 +70,8 @@ namespace SpotifyAdSkipper
 
         private void EditAdFeaturesButton_Click(object sender, EventArgs e)
         {
-            EditAdFeaturesForm editAdFeaturesForm = new EditAdFeaturesForm();
-            editAdFeaturesForm.Show();
+            EditAdFiltersForm editAdFiltersForm = new EditAdFiltersForm();
+            editAdFiltersForm.Show();
         }
 
         private async void CurrentTitleRegisterButton_Click(object sender, EventArgs e)
@@ -79,10 +79,10 @@ namespace SpotifyAdSkipper
             var playingTracks = await SpotifyController.GetPlayingAudios();
             if (playingTracks.Count > 0)
             {
-                AddDetectionFeatureForm addDetectionFeatureForm = new AddDetectionFeatureForm(
+                AddAdFilterForm addAdFilterForm = new AddAdFilterForm(
                     AdDetection.AudioProperty.Title,
                     playingTracks[0].Title.ToLower());
-                addDetectionFeatureForm.Show();
+                addAdFilterForm.Show();
             }
         }
 
@@ -91,10 +91,10 @@ namespace SpotifyAdSkipper
             var playingTracks = await SpotifyController.GetPlayingAudios();
             if (playingTracks.Count > 0)
             {
-                AddDetectionFeatureForm addDetectionFeatureForm = new AddDetectionFeatureForm(
+                AddAdFilterForm addAdFiltersForm = new AddAdFilterForm(
                     AdDetection.AudioProperty.Album,
                     playingTracks[0].AlbumTitle.ToLower());
-                addDetectionFeatureForm.Show();
+                addAdFiltersForm.Show();
             }
         }
     }

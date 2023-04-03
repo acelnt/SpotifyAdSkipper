@@ -1,6 +1,6 @@
 ﻿namespace SpotifyAdSkipper
 {
-    partial class EditAdFeaturesForm
+    partial class EditAdFiltersForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,9 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.PropertyTabs = new System.Windows.Forms.TabControl();
             this.Title = new System.Windows.Forms.TabPage();
-            this.detectionFeatureEditControl1 = new SpotifyAdSkipper.DetectionFeatureEditControl();
+            this.detectionFeatureEditControl1 = new SpotifyAdSkipper.FilterListEditControl();
             this.Album = new System.Windows.Forms.TabPage();
-            this.detectionFeatureEditControl2 = new SpotifyAdSkipper.DetectionFeatureEditControl();
+            this.detectionFeatureEditControl2 = new SpotifyAdSkipper.FilterListEditControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.PropertyTabs.SuspendLayout();
             this.Title.SuspendLayout();
@@ -112,7 +112,7 @@
         private System.Windows.Forms.TabPage Title;
         private System.Windows.Forms.TabPage Album;
         private System.Windows.Forms.Timer timer1;
-        private DetectionFeatureEditControl detectionFeatureEditControl1;
-        private DetectionFeatureEditControl detectionFeatureEditControl2;
+        private FilterListEditControl detectionFeatureEditControl1;
+        private FilterListEditControl detectionFeatureEditControl2;
     }
 }

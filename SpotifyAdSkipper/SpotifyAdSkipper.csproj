@@ -47,11 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddDetectionFeatureForm.cs">
+    <Compile Include="AddAdFilterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddDetectionFeatureForm.Designer.cs">
-      <DependentUpon>AddDetectionFeatureForm.cs</DependentUpon>
+    <Compile Include="AddAdFilterForm.Designer.cs">
+      <DependentUpon>AddAdFilterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AdDetection\AdDetectionEnums.cs" />
     <Compile Include="AdDetection\AdDetector.cs" />
@@ -61,33 +61,33 @@
     <Compile Include="AdSkipperInfoForm.Designer.cs">
       <DependentUpon>AdSkipperInfoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditAdFeaturesForm.cs">
+    <Compile Include="EditAdFiltersForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditAdFeaturesForm.Designer.cs">
-      <DependentUpon>EditAdFeaturesForm.cs</DependentUpon>
+    <Compile Include="EditAdFiltersForm.Designer.cs">
+      <DependentUpon>EditAdFiltersForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdDetection\AdDetectionFeatureCollection.cs" />
+    <Compile Include="AdDetection\AdDetectionFilterCollection.cs" />
     <Compile Include="Logging\Logger.Buffer.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Logging\LoggerReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpotifyController.cs" />
-    <Compile Include="DetectionFeatureEditControl.cs">
+    <Compile Include="FilterListEditControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DetectionFeatureEditControl.Designer.cs">
-      <DependentUpon>DetectionFeatureEditControl.cs</DependentUpon>
+    <Compile Include="FilterListEditControl.Designer.cs">
+      <DependentUpon>FilterListEditControl.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddDetectionFeatureForm.resx">
-      <DependentUpon>AddDetectionFeatureForm.cs</DependentUpon>
+    <EmbeddedResource Include="AddAdFilterForm.resx">
+      <DependentUpon>AddAdFilterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdSkipperInfoForm.resx">
       <DependentUpon>AdSkipperInfoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditAdFeaturesForm.resx">
-      <DependentUpon>EditAdFeaturesForm.cs</DependentUpon>
+    <EmbeddedResource Include="EditAdFiltersForm.resx">
+      <DependentUpon>EditAdFiltersForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -99,8 +99,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="DetectionFeatureEditControl.resx">
-      <DependentUpon>DetectionFeatureEditControl.cs</DependentUpon>
+    <EmbeddedResource Include="FilterListEditControl.resx">
+      <DependentUpon>FilterListEditControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

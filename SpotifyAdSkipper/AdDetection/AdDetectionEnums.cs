@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpotifyAdSkipper.AdDetection
 {
-    public enum DetectionStrength
+    public enum MatchStrength
     {
         Exact,
         Contains
