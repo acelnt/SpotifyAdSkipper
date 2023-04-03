@@ -65,7 +65,7 @@ namespace SpotifyAdSkipper
         /// <summary>
         /// Kills the spotify process, starts it up again and plays next track
         /// </summary>
-        public async static void CloseAndRestart()
+        public static void CloseAndRestart()
         {
             IntPtr spotifyWindowHandle = GetHandle();
 
