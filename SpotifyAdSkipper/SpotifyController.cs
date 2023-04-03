@@ -31,6 +31,8 @@ namespace SpotifyAdSkipper
 
         const string PROCESS_NAME = "Spotify";
 
+        static string _previousSong;
+
         /// <summary>
         /// Checks if an ad is playing and skips if it is
         /// </summary>
@@ -49,18 +51,21 @@ namespace SpotifyAdSkipper
                 CloseAndRestart();
             } else
             {
-                // Log that there is no ad and the audios that are playing in the format:
-                // No ad detected: title - album, title2 - album2, title3, album3
                 List<string> audioStrings = new List<string>();
                 foreach (var audio in playingAudios) { audioStrings.Add($"{audio.Title} - {audio.AlbumTitle}"); }
-                Logger.Write($"No ad detected: {String.Join(",", audioStrings)}");
+                string currentSong = $"No ad detected: {String.Join(",", audioStrings)}";
+                if (currentSong != _previousSong)
+                {
+                    _previousSong = currentSong;
+                    Logger.Write(currentSong);
+                }
             }
         }
 
         /// <summary>
         /// Kills the spotify process, starts it up again and plays next track
         /// </summary>
-        public static void CloseAndRestart()
+        public async static void CloseAndRestart()
         {
             IntPtr spotifyWindowHandle = GetHandle();
 

@@ -86,7 +86,7 @@ namespace SpotifyAdSkipper.AdDetection
         }
 
         /// <summary>
-        /// Returns a list of match values for filters for audioProperty and matchStrength
+        /// Returns a list of match values for filters with audioProperty and matchStrength
         /// </summary>
         /// <param name="audioProperty"></param>
         /// <param name="matchStrength"></param>
