@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdSkipperInfoForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CurrentArtistRegisterButton = new System.Windows.Forms.Button();
             this.CurrentAlbumRegisterbutton = new System.Windows.Forms.Button();
             this.CurrentTitleRegisterButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -43,7 +44,7 @@
             this.FormUpdate = new System.Windows.Forms.Timer(this.components);
             this.StopButton = new System.Windows.Forms.Button();
             this.EditAdFeaturesButton = new System.Windows.Forms.Button();
-            this.CurrentArtistRegisterButton = new System.Windows.Forms.Button();
+            this.ForceSkipButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -51,6 +52,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ForceSkipButton);
             this.groupBox1.Controls.Add(this.CurrentArtistRegisterButton);
             this.groupBox1.Controls.Add(this.CurrentAlbumRegisterbutton);
             this.groupBox1.Controls.Add(this.CurrentTitleRegisterButton);
@@ -62,11 +64,21 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Current Info";
             // 
+            // CurrentArtistRegisterButton
+            // 
+            this.CurrentArtistRegisterButton.Location = new System.Drawing.Point(258, 109);
+            this.CurrentArtistRegisterButton.Name = "CurrentArtistRegisterButton";
+            this.CurrentArtistRegisterButton.Size = new System.Drawing.Size(120, 23);
+            this.CurrentArtistRegisterButton.TabIndex = 5;
+            this.CurrentArtistRegisterButton.Text = "Filter artist";
+            this.CurrentArtistRegisterButton.UseVisualStyleBackColor = true;
+            this.CurrentArtistRegisterButton.Click += new System.EventHandler(this.CurrentArtistRegisterButton_Click);
+            // 
             // CurrentAlbumRegisterbutton
             // 
-            this.CurrentAlbumRegisterbutton.Location = new System.Drawing.Point(172, 109);
+            this.CurrentAlbumRegisterbutton.Location = new System.Drawing.Point(132, 109);
             this.CurrentAlbumRegisterbutton.Name = "CurrentAlbumRegisterbutton";
-            this.CurrentAlbumRegisterbutton.Size = new System.Drawing.Size(159, 23);
+            this.CurrentAlbumRegisterbutton.Size = new System.Drawing.Size(120, 23);
             this.CurrentAlbumRegisterbutton.TabIndex = 4;
             this.CurrentAlbumRegisterbutton.Text = "Filter album title";
             this.CurrentAlbumRegisterbutton.UseVisualStyleBackColor = true;
@@ -76,7 +88,7 @@
             // 
             this.CurrentTitleRegisterButton.Location = new System.Drawing.Point(6, 109);
             this.CurrentTitleRegisterButton.Name = "CurrentTitleRegisterButton";
-            this.CurrentTitleRegisterButton.Size = new System.Drawing.Size(160, 23);
+            this.CurrentTitleRegisterButton.Size = new System.Drawing.Size(120, 23);
             this.CurrentTitleRegisterButton.TabIndex = 3;
             this.CurrentTitleRegisterButton.Text = "Filter song title";
             this.CurrentTitleRegisterButton.UseVisualStyleBackColor = true;
@@ -184,15 +196,15 @@
             this.EditAdFeaturesButton.UseVisualStyleBackColor = true;
             this.EditAdFeaturesButton.Click += new System.EventHandler(this.EditAdFeaturesButton_Click);
             // 
-            // CurrentArtistRegisterButton
+            // ForceSkipButton
             // 
-            this.CurrentArtistRegisterButton.Location = new System.Drawing.Point(337, 109);
-            this.CurrentArtistRegisterButton.Name = "CurrentArtistRegisterButton";
-            this.CurrentArtistRegisterButton.Size = new System.Drawing.Size(159, 23);
-            this.CurrentArtistRegisterButton.TabIndex = 5;
-            this.CurrentArtistRegisterButton.Text = "Filter artist";
-            this.CurrentArtistRegisterButton.UseVisualStyleBackColor = true;
-            this.CurrentArtistRegisterButton.Click += new System.EventHandler(this.CurrentArtistRegisterButton_Click);
+            this.ForceSkipButton.Location = new System.Drawing.Point(385, 109);
+            this.ForceSkipButton.Name = "ForceSkipButton";
+            this.ForceSkipButton.Size = new System.Drawing.Size(111, 23);
+            this.ForceSkipButton.TabIndex = 6;
+            this.ForceSkipButton.Text = "Force skip";
+            this.ForceSkipButton.UseVisualStyleBackColor = true;
+            this.ForceSkipButton.Click += new System.EventHandler(this.ForceSkipButton_Click);
             // 
             // AdSkipperInfoForm
             // 
@@ -232,5 +244,6 @@
         private System.Windows.Forms.Button CurrentAlbumRegisterbutton;
         private System.Windows.Forms.Button CurrentTitleRegisterButton;
         private System.Windows.Forms.Button CurrentArtistRegisterButton;
+        private System.Windows.Forms.Button ForceSkipButton;
     }
 }

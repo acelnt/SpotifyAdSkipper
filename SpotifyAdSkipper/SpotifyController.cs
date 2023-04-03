@@ -201,7 +201,7 @@ namespace SpotifyAdSkipper
         static void Launch()
         {
             // Launch Spotify
-            Process.Start("spotify.exe", "--minimized");
+            Process.Start("spotify", "--minimized");
         }
 
         /// <summary>

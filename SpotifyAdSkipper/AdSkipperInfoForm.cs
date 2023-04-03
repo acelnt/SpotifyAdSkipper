@@ -117,5 +117,10 @@ namespace SpotifyAdSkipper
                 addAdFiltersForm.Show();
             }
         }
+
+        private void ForceSkipButton_Click(object sender, EventArgs e)
+        {
+            SpotifyController.CloseAndRestart();
+        }
     }
 }
