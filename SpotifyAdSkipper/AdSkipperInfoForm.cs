@@ -113,7 +113,7 @@ namespace SpotifyAdSkipper
             {
                 AddAdFilterForm addAdFiltersForm = new AddAdFilterForm(
                     AdDetection.AudioProperty.Artist,
-                    playingTracks[0].AlbumTitle.ToLower());
+                    playingTracks[0].Artist.ToLower());
                 addAdFiltersForm.Show();
             }
         }
