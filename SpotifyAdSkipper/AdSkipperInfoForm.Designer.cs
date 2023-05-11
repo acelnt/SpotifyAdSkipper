@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdSkipperInfoForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ForceSkipButton = new System.Windows.Forms.Button();
             this.CurrentArtistRegisterButton = new System.Windows.Forms.Button();
             this.CurrentAlbumRegisterbutton = new System.Windows.Forms.Button();
             this.CurrentTitleRegisterButton = new System.Windows.Forms.Button();
@@ -44,7 +45,6 @@
             this.FormUpdate = new System.Windows.Forms.Timer(this.components);
             this.StopButton = new System.Windows.Forms.Button();
             this.EditAdFeaturesButton = new System.Windows.Forms.Button();
-            this.ForceSkipButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -63,6 +63,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Current Info";
+            // 
+            // ForceSkipButton
+            // 
+            this.ForceSkipButton.Location = new System.Drawing.Point(385, 109);
+            this.ForceSkipButton.Name = "ForceSkipButton";
+            this.ForceSkipButton.Size = new System.Drawing.Size(111, 23);
+            this.ForceSkipButton.TabIndex = 6;
+            this.ForceSkipButton.Text = "Force skip";
+            this.ForceSkipButton.UseVisualStyleBackColor = true;
+            this.ForceSkipButton.Click += new System.EventHandler(this.ForceSkipButton_Click);
             // 
             // CurrentArtistRegisterButton
             // 
@@ -164,6 +174,7 @@
             // LogBox
             // 
             this.LogBox.Location = new System.Drawing.Point(6, 19);
+            this.LogBox.MaxLength = 100;
             this.LogBox.Multiline = true;
             this.LogBox.Name = "LogBox";
             this.LogBox.ReadOnly = true;
@@ -195,16 +206,6 @@
             this.EditAdFeaturesButton.Text = "Edit ad filters";
             this.EditAdFeaturesButton.UseVisualStyleBackColor = true;
             this.EditAdFeaturesButton.Click += new System.EventHandler(this.EditAdFeaturesButton_Click);
-            // 
-            // ForceSkipButton
-            // 
-            this.ForceSkipButton.Location = new System.Drawing.Point(385, 109);
-            this.ForceSkipButton.Name = "ForceSkipButton";
-            this.ForceSkipButton.Size = new System.Drawing.Size(111, 23);
-            this.ForceSkipButton.TabIndex = 6;
-            this.ForceSkipButton.Text = "Force skip";
-            this.ForceSkipButton.UseVisualStyleBackColor = true;
-            this.ForceSkipButton.Click += new System.EventHandler(this.ForceSkipButton_Click);
             // 
             // AdSkipperInfoForm
             // 
