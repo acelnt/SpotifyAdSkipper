@@ -140,8 +140,15 @@ namespace SpotifyAdSkipper
             var result = new List<GlobalSystemMediaTransportControlsSessionMediaProperties>();
 
             // Create a GlobalSystemMediaTransportControlsSessionManager instance
-            GlobalSystemMediaTransportControlsSessionManager sessionManager =
-                await GlobalSystemMediaTransportControlsSessionManager.RequestAsync();
+            GlobalSystemMediaTransportControlsSessionManager sessionManager;
+            try
+            {
+                sessionManager = await GlobalSystemMediaTransportControlsSessionManager.RequestAsync();
+            } catch
+            {
+                return result;
+            }
+            
 
             // Get the current session for Spotify
             var sessions = sessionManager.GetSessions();
