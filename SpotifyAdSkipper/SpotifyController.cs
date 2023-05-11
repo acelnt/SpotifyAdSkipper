@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
@@ -65,23 +66,29 @@ namespace SpotifyAdSkipper
         /// <summary>
         /// Kills the spotify process, starts it up again and plays next track
         /// </summary>
-        public static void CloseAndRestart()
+        public static async void CloseAndRestart()
         {
             IntPtr spotifyWindowHandle = GetHandle();
 
             // Kill the Spotify process
             Kill();
+
+            // Wait until the spotify killed to move on
+            while (IsSpotifyRunning())
+            {
+                await Task.Delay(25);
+            }
             Logger.Write("Spotify killed");
 
             // Launch the Spotify process
             Launch();
 
-            // Wait until the window appears to move it
-            spotifyWindowHandle = GetHandle();
-            while (spotifyWindowHandle == (IntPtr)0)
+            // Wait until the window appears to start playing
+            while (!IsSpotifyRunning())
             {
-                spotifyWindowHandle = GetHandle();
+                await Task.Delay(25);
             }
+            spotifyWindowHandle = GetHandle();
             Logger.Write("Spotify Launched");
 
             StartPlaying(spotifyWindowHandle);
@@ -185,6 +192,15 @@ namespace SpotifyAdSkipper
         static IntPtr GetHandle()
         {
             return FindWindow(null, "Spotify Free");
+        }
+
+        /// <summary>
+        /// Returns true if spotify is detected to be running
+        /// </summary>
+        /// <returns></returns>
+        static bool IsSpotifyRunning()
+        {
+            return GetHandle() != (IntPtr)0;
         }
 
         /// <summary>
