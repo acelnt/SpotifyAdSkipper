@@ -186,21 +186,32 @@ namespace SpotifyAdSkipper
         }
 
         /// <summary>
+        /// Returns the processes which may be the spotiofy application (named the PROCESS_NAME)
+        /// </summary>
+        /// <returns></returns>
+        static Process[] GetSpotifyProcesses()
+        {
+            Process[] processes = Process.GetProcessesByName(PROCESS_NAME);
+
+            return processes;
+        }
+
+        /// <summary>
         /// Returns the handle for the spotify window
         /// </summary>
         /// <returns></returns>
-        static IntPtr GetHandle()
+        public static IntPtr GetHandle()
         {
-            return FindWindow(null, "Spotify Free");
+            return GetSpotifyProcesses()[0].MainWindowHandle;
         }
 
         /// <summary>
         /// Returns true if spotify is detected to be running
         /// </summary>
         /// <returns></returns>
-        static bool IsSpotifyRunning()
+        public static bool IsSpotifyRunning()
         {
-            return GetHandle() != (IntPtr)0;
+            return GetSpotifyProcesses().Length > 0;
         }
 
         /// <summary>
@@ -209,7 +220,7 @@ namespace SpotifyAdSkipper
         static void Kill()
         {
             // Get all Spotify processes
-            Process[] processes = Process.GetProcessesByName(PROCESS_NAME);
+            Process[] processes = GetSpotifyProcesses();
 
             // Kill each process
             foreach (Process process in processes)
