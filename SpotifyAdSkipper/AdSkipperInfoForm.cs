@@ -64,6 +64,16 @@ namespace SpotifyAdSkipper
             {
                 IsAdLabel.Text = "No";
             }
+
+            // Set Playing Audio label to yes or no based on whether or not spotify is open
+            if (SpotifyController.IsSpotifyRunning())
+            {
+                lblSpotifyOpenInfo.Text = "Yes";
+            }
+            else
+            {
+                lblSpotifyOpenInfo.Text = "No";
+            }
         }
 
         private void StopButton_Click(object sender, EventArgs e)
