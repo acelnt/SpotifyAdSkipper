@@ -12,6 +12,9 @@ namespace SpotifyAdSkipper
 {
     internal static class SpotifyController
     {
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
         [DllImport("user32.dll")]
         static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
@@ -59,7 +62,7 @@ namespace SpotifyAdSkipper
         /// </summary>
         public static async void CloseAndRestart()
         {
-            IntPtr spotifyWindowHandle = GetHandle();
+            IntPtr spotifyWindowHandle = GetWindowHandle();
 
             // Kill the Spotify process
             Kill();
@@ -75,11 +78,12 @@ namespace SpotifyAdSkipper
             Launch();
 
             // Wait until the window appears to start playing
-            while (!IsSpotifyRunning())
+            while (!HasSpotifyInitialised())
             {
                 await Task.Delay(25);
             }
-            spotifyWindowHandle = GetHandle();
+
+            spotifyWindowHandle = GetWindowHandle();
             Logger.Write("Spotify Launched");
 
             StartPlaying(spotifyWindowHandle);
@@ -191,9 +195,17 @@ namespace SpotifyAdSkipper
         /// Returns the handle for the spotify window
         /// </summary>
         /// <returns></returns>
-        public static IntPtr GetHandle()
+        static IntPtr GetWindowHandle()
         {
-            return GetSpotifyProcesses()[0].MainWindowHandle;
+            Process[] processes = GetSpotifyProcesses();
+            Process windowProcess = processes.FirstOrDefault(p => p.MainWindowHandle != IntPtr.Zero);
+
+            IntPtr handle = IntPtr.Zero;
+            if (windowProcess != null)
+            {
+                handle = windowProcess.MainWindowHandle;
+            }
+            return handle;
         }
 
         /// <summary>
@@ -203,6 +215,16 @@ namespace SpotifyAdSkipper
         public static bool IsSpotifyRunning()
         {
             return GetSpotifyProcesses().Length > 0;
+        }
+
+        /// <summary>
+        /// Will return true briefly after spotify is initialised and ready to take inputs.
+        /// Only works for spotify free
+        /// </summary>
+        /// <returns></returns>
+        static bool HasSpotifyInitialised()
+        {
+            return FindWindow(null, "Spotify Free") != IntPtr.Zero;
         }
 
         /// <summary>
@@ -244,7 +266,7 @@ namespace SpotifyAdSkipper
         /// </summary>
         static void StartPlaying()
         {
-            IntPtr hwnd = GetHandle();
+            IntPtr hwnd = GetWindowHandle();
 
             // Send the play command to the Spotify window
             SendMessage(hwnd, WM_APPCOMMAND, IntPtr.Zero, (IntPtr)APPCOMMAND_MEDIA_PLAY);
@@ -265,7 +287,7 @@ namespace SpotifyAdSkipper
         /// </summary>
         static void NextTrack()
         {
-            IntPtr hwnd = GetHandle();
+            IntPtr hwnd = GetWindowHandle();
 
             // Send the skip command to the Spotify window
             SendMessage(hwnd, WM_APPCOMMAND, IntPtr.Zero, (IntPtr)APPCOMMAND_MEDIA_NEXTTRACK);
